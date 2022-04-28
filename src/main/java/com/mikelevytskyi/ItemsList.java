@@ -1,5 +1,9 @@
 package com.mikelevytskyi;
 
+/*
+Unused class, but can be useful for better solution
+ */
+
 import java.util.ArrayList;
 import java.util.List;
 

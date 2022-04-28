@@ -144,17 +144,19 @@ public class App
                         System.out.println("Price is: " + items.get(i).getPrice());
                         System.out.println("Insufiicient Funds.");
 
-                        System.out.println("Serving a product...\n...\n...\n...");
-                        System.out.println("Transaction Completed. Have a good day.");
+                        /*
+                        Has to return for adding funds here *unfinished*
+                         */
 
                     }
                     else if (moneyPool >= Double.parseDouble(priceTokens[1])){
                         change = moneyPool - Double.parseDouble(priceTokens[1]);
                         System.out.println("Price is: " + items.get(i).getPrice() + "\nYour change is: " + "$" + (Math.round(change*100.0)/100.0));
 
-                        /*
-                        It would need to return to add funds
-                         */
+                        System.out.println("Serving a product...\n...\n...\n...");
+                        System.out.println("Transaction Completed. Have a good day.");
+
+
                     }
                     //reduce amount in stock
                     items.get(i).setAmount(items.get(i).getAmount() - 1);
