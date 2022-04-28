@@ -18,7 +18,7 @@ public class App
         System.out.println("Taking bills: $1, 5; Coins: 5, 10, 25");
 
         //Payment Simulation
-        System.out.print("\nSelect 1 for $1\nSelect 2 for $5\nSelect 3 for 5¢\n Select 4 for 10¢\nSelect 5 for 25¢\nSelect 0 if you are done inserting cash");
+        System.out.print("\nSelect 1 for $1\nSelect 2 for $5\nSelect 3 for 5¢\nSelect 4 for 10¢\nSelect 5 for 25¢\nSelect 0 if you are done inserting cash\n\n");
 
         while(flag) {
             //user input
@@ -46,12 +46,17 @@ public class App
                     moneyPool = moneyPool + 0.25;
                     break;
                 case 0:
-                    flag = false;
+                    if(moneyPool == 0) {
+                        System.out.println("Your balance is $0.0, insert money to proceed.");
+                    }
+                    else{
+                        flag = false;
+                    }
                     break;
             }
         }
 
-        System.out.println("You've got " + moneyPool);
+        System.out.println("You've got $" + moneyPool);
 
         //-------------------------------------------------------------------------
 
@@ -66,7 +71,23 @@ public class App
             Config config = mapper.treeToValue(node.get("config"), Config.class);
             List items = JsonMapper.readItems(node);
 
-            int setup[][] = new int[config.getRows()][Integer.valueOf(config.getColumns())];
+            //System.out.println(items.size());
+
+            String setup[][] = new String[config.getRows()][Integer.valueOf(config.getColumns())];
+
+            for( int i = 0; i < config.getRows(); i++ ){
+                System.out.println("");
+                for (int j=0; j< Integer.valueOf(config.getColumns()); j++) {
+
+                    int listIndex = 0;
+
+                    Item item = (Item) items.get(listIndex);
+                    setup[i][j] = item.getName();
+                    System.out.print(setup[i][j] + " ");
+
+                    listIndex++;
+                }
+            }
 
             //items.stream().forEach(x -> System.out.println(x));
         } catch (IOException e) {
