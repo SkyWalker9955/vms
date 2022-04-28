@@ -10,6 +10,7 @@ public class App
 {
     public static void main( String[] args )
     {
+        char[] alphabet = {'A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'};
         double moneyPool = 0;
         boolean flag = true;
         Scanner scanner = new Scanner(System.in);
@@ -73,21 +74,38 @@ public class App
 
             //System.out.println(items.size());
 
+            //Prompt customer for product selection
+            System.out.println("Make a selection, please.");
+            String productSelection = scanner.nextLine();
+
+            //assign items and display vending machine interface
             String setup[][] = new String[config.getRows()][Integer.valueOf(config.getColumns())];
+            int listIndex = 0;
 
             for( int i = 0; i < config.getRows(); i++ ){
-                System.out.println("");
+
                 for (int j=0; j< Integer.valueOf(config.getColumns()); j++) {
+                    System.out.print("| " + alphabet[i] + j + "-");
 
-                    int listIndex = 0;
-
-                    Item item = (Item) items.get(listIndex);
-                    setup[i][j] = item.getName();
-                    System.out.print(setup[i][j] + " ");
-
-                    listIndex++;
+                    if(listIndex < 9){
+                        Item item = (Item) items.get(listIndex);
+                        setup[i][j] = item.getName();
+                        System.out.print(setup[i][j] + " |");
+                    }
+                    else {
+                        setup[i][j] = "Empty-Tray";
+                        System.out.print(setup[i][j] + " |");
+                    }
+                    listIndex = listIndex + 1;
                 }
+                System.out.println("\n");
             }
+
+            //at this point user has made a selection, let's work with it
+
+
+
+
 
             //items.stream().forEach(x -> System.out.println(x));
         } catch (IOException e) {
