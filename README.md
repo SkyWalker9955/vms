@@ -1,7 +1,7 @@
-### Vending Machine Software
+# Vending Machine Software
 ##Argano Coding Challenge
 
-#Short description
+###Short description
 This is a Maven project based on Maven archetype 1889.
 
 #How to run a project: 
@@ -9,8 +9,9 @@ This is a Maven project based on Maven archetype 1889.
 2. Open intelliJ IDEA and select open project.
 3. Select a pom.xml file if the vms folder.
 4. Build and Run the project
-# *Make sure dependencies installed, check pom.xml* 
 
+
+## *Make sure dependencies installed, check pom.xml* 
 #Here are all dependencies from xml file:
 #JUNIT JUPITER
 #JACKSON libraey for handling JSON
@@ -36,7 +37,7 @@ This is a Maven project based on Maven archetype 1889.
   </dependencies>
   
   
-### Description on the approach.
+## Description on the approach.
 While is not the prettiest looking console output, the app is almost functional.
 *The result you will see in the project code would reflect what I was able to come out in two days given*
 
@@ -50,6 +51,6 @@ This project absolutely needs refinment.
 1. finish logging functionality, making sure that each step user takes gets recorded and appended to a file that will be stored/send to a control server when program is done.
 2. Make sure that the program always runs.
 
-###Will be glad to hear your feedback on this. I learned a lot doing this project.
+##Will be glad to hear your feedback on this. I learned a lot doing this project.
   
   
