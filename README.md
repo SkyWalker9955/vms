@@ -10,6 +10,8 @@ This is a Maven project based on Maven archetype 1889.
 3. Select a pom.xml file if the vms folder.
 4. Build and Run the project
 
+##Make sure to update a json file path in App.java line 68 and do the same in JsonMapperTest
+
 
 ## *Make sure dependencies installed, check pom.xml* 
 #Here are all dependencies from xml file:
