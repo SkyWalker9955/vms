@@ -80,7 +80,6 @@ public class App
             //assign items and display vending machine interface
             String[][] setup = new String[config.getRows()][Integer.parseInt(config.getColumns())];
             int listIndex = 0;
-
             for( int i = 0; i < config.getRows(); i++ ){
 
                 for (int j = 0; j< Integer.parseInt(config.getColumns()); j++) {
@@ -124,8 +123,9 @@ public class App
                 }
             }
 
-            for (int i = 0; i < tokens.length; i++) {
-                System.out.println(tokens[i]);
+            for (int i = 0; i < items.size(); i++) {
+                boolean isSelectedItem = items.get(i).getName().contains(tokens[1]);
+                System.out.println(isSelectedItem);
             }
 
 
