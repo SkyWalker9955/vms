@@ -70,26 +70,25 @@ public class App
 
             JsonNode node = JsonMapper.parse(filePath);
             Config config = mapper.treeToValue(node.get("config"), Config.class);
-            List items = JsonMapper.readItems(node);
+            List<Item> items = JsonMapper.readItems(node);
 
             //System.out.println(items.size());
 
             //Prompt customer for product selection
-            System.out.println("Make a selection, please.");
-            String productSelection = scanner.nextLine();
+            System.out.println("Make a selection, please.\n");
 
             //assign items and display vending machine interface
-            String setup[][] = new String[config.getRows()][Integer.valueOf(config.getColumns())];
+            String[][] setup = new String[config.getRows()][Integer.parseInt(config.getColumns())];
             int listIndex = 0;
 
             for( int i = 0; i < config.getRows(); i++ ){
 
-                for (int j=0; j< Integer.valueOf(config.getColumns()); j++) {
-                    System.out.print("| " + alphabet[i] + j + "-");
+                for (int j = 0; j< Integer.parseInt(config.getColumns()); j++) {
+                    //System.out.print("| " + alphabet[i] + j + "-");
 
                     if(listIndex < 9){
-                        Item item = (Item) items.get(listIndex);
-                        setup[i][j] = item.getName();
+                        Item item = items.get(listIndex);
+                        setup[i][j] = Character.toString(alphabet[i]) + Integer.toString(j) + "-" + item.getName();
                         System.out.print(setup[i][j] + " |");
                     }
                     else {
@@ -100,9 +99,42 @@ public class App
                 }
                 System.out.println("\n");
             }
+            listIndex = 0;
+
+            //Take in user input
+            String productSelection = scanner.next();
+
+            //System.out.println(productSelection.length());
 
             //at this point user has made a selection, let's work with it
+            char[] selection = new char[productSelection.length()];
+            String[] tokens = new String[2];
 
+            for (int i = 0; i < config.getRows(); i++) {
+                for (int j = 0; j < Integer.parseInt(config.getColumns()); j++) {
+                    boolean doesContain = setup[i][j].contains(productSelection);
+                    //System.out.println(doesContain + " " + setup[i][j]);
+
+                    if(doesContain == true) {
+                        int itemsLength = items.size();
+
+                        //System.out.println(setup[i][j]);
+                        tokens = setup[i][j].split("-");
+                    }
+                }
+            }
+
+            for (int i = 0; i < tokens.length; i++) {
+                System.out.println(tokens[i]);
+            }
+
+
+            /*
+            for(int i = 0; i < productSelection1.length(); i++ ) {
+                //selection[0] =
+            }
+
+             */
 
 
 
