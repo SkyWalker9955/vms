@@ -2,6 +2,8 @@ package com.mikelevytskyi;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+
+import javax.swing.plaf.synth.SynthOptionPaneUI;
 import java.io.IOException;
 import java.util.List;
 import java.util.Scanner;
@@ -13,10 +15,11 @@ public class App
         char[] alphabet = {'A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'};
         double moneyPool = 0;
         boolean flag = true;
+        double change = 0;
         Scanner scanner = new Scanner(System.in);
 
         //Prompt
-        System.out.println("Taking bills: $1, 5; Coins: 5, 10, 25");
+        System.out.println("Taking bills: $1, 5; Coins: 5, 10, 25;");
 
         //Payment Simulation
         System.out.print("\nSelect 1 for $1\nSelect 2 for $5\nSelect 3 for 5¢\nSelect 4 for 10¢\nSelect 5 for 25¢\nSelect 0 if you are done inserting cash\n\n");
@@ -108,6 +111,7 @@ public class App
             //at this point user has made a selection, let's work with it
             char[] selection = new char[productSelection.length()];
             String[] tokens = new String[2];
+            String[] priceTokens = new String[2];
 
             for (int i = 0; i < config.getRows(); i++) {
                 for (int j = 0; j < Integer.parseInt(config.getColumns()); j++) {
@@ -116,37 +120,52 @@ public class App
 
                     if(doesContain == true) {
                         int itemsLength = items.size();
-
                         //System.out.println(setup[i][j]);
                         tokens = setup[i][j].split("-");
                     }
                 }
             }
 
+            //finding the item and decreasing its amount on purchase.
+
             for (int i = 0; i < items.size(); i++) {
                 boolean isSelectedItem = items.get(i).getName().contains(tokens[1]);
-                System.out.println(isSelectedItem);
+                //System.out.println(isSelectedItem);
+                if (isSelectedItem /* && moneyPool >= Double.parseDouble(items.get(i).getPrice()) */){
+
+                    priceTokens = items.get(i).getPrice().split("\\$");
+                    /*
+                    for (int j = 0; j < priceTokens.length; j++) {
+                        System.out.println(priceTokens[1] + "~~~");
+                    }
+                    */
+                    //calculate change
+                    if(moneyPool < Double.parseDouble(priceTokens[1])) {
+                        System.out.println("Price is: " + items.get(i).getPrice());
+                        System.out.println("Insufiicient Funds.");
+
+                        System.out.println("Serving a product...\n...\n...\n...");
+                        System.out.println("Transaction Completed. Have a good day.");
+
+                    }
+                    else if (moneyPool >= Double.parseDouble(priceTokens[1])){
+                        change = moneyPool - Double.parseDouble(priceTokens[1]);
+                        System.out.println("Price is: " + items.get(i).getPrice() + "\nYour change is: " + "$" + (Math.round(change*100.0)/100.0));
+
+                        /*
+                        It would need to return to add funds
+                         */
+                    }
+                    //reduce amount in stock
+                    items.get(i).setAmount(items.get(i).getAmount() - 1);
+                }
             }
-
-
-            /*
-            for(int i = 0; i < productSelection1.length(); i++ ) {
-                //selection[0] =
-            }
-
-             */
-
-
 
 
             //items.stream().forEach(x -> System.out.println(x));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-
-        //------------------------------------------------------------
-
-        //After update is read, based on config we need a setup to happen.
 
 
     }
